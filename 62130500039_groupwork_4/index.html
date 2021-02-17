@@ -23,14 +23,15 @@
 </head>
 
 <body>
-  <div id="app" class="bg-gray-300 relative" style="min-height: 100vh;">
+  <div id="app" class="relative">
     <!-- head -->
     <div class="top-0 h-20 bg-gradient-to-r from-red-500 to-purple-500">
       <div class="flex justify-start">
         <img class="ml-8 mt-4 w-20 h-12" src="./images/idle_logo.png">
         <div class="w-full pt-6 pr-8 space-x-2 flex justify-end">
           <div>
-            <input v-show="search.clicked" type="text" placeholder="Enter member name..." class="px-2 rounded bg-gray-200">
+            <input v-show="search.clicked" type="text" placeholder="Enter member name..." v-model="searchText"
+              class="px-2 rounded bg-gray-200">
           </div>
           <div class="space-x-1">
             <button @click="showSearch" v-show="search.notclick">
@@ -44,7 +45,7 @@
           </div>
 
           <div class="font-semibold text-white">
-            Liked ( {{ countUndone }} )
+            Liked ( {{ countLiked }} )
           </div>
 
           <div>
@@ -60,32 +61,30 @@
 
     </div>
 
-    <div class="relative overflow-hidden">
-
-      <div class="flex md:flex-wrap absolute z-10 justify-center space-x-28 space-y-8 mt-6 max-h-3/4 w-5/6">
-
-        <div v-for="(member,index) in members">
-          <div class="grid justify-items-center">
-            <div>
-              <img width="250" height="250" v-bind:src="member.image" @click="toggleDone(index)">
-               <p class="text-xl font-semibold"> {{ member.text }} </p>
-            </div>
-
-            <div>
-              <span class="material-icons" style="font-size: 50px; color:white" v-show="member.done">favorite</span>
-            </div>
+    <div class="absolute overflow-hidden">
+      <ul class="grid grid-cols-2 grid-rows-2 gap-x-28 gap-y-8 md:ml-96 mt-10 lg:grid-cols-3">
+        <li v-for="(member, index) in members">
+          <img v-bind:src="member.image" class="h-96 w-64" :alt="member.text" @click="toggleLike(index)">
+          <p class="text-lg font-bold"> {{ member.text }} </p>
+          <div class="flex flex-row justify-start space-x-1">
+            <p>
+              <button @click="toggleLike(index)">
+                <span class="material-icons" v-if="member.unlike">favorite_border</span>
+              </button>
+              <button @click="toggleLike(index)">
+                <span class="material-icons"v-show="member.like">favorite</span>
+              </button>
+            </p>
 
           </div>
-
-        </div>
-
-      </div>
-
-      <video autoplay muted loop class="relative opacity-60">
-        <source src="./vdo/hwaa.mp4" type="video/mp4">
-      </video>
+        </li>
+      </ul>
 
     </div>
+
+    <video autoplay muted loop class="relative opacity-50" style="z-index: -1;">
+      <source src="./vdo/hwaa.mp4" type="video/mp4">
+    </video>
 
     <!-- footer -->
     <div class="h-16 w-full bottom-0 flex space-x-6 justify-center absolute" style="background-color: #7e00bf;">
@@ -144,7 +143,6 @@
     </div>
 
   </div>
-
 
   <!-- my main.js -->
   <script src="./main.js"></script>

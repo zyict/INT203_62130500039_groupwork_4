@@ -4,53 +4,62 @@
                 members: [{
                         image: './images/miyeon.jpg',
                         text: 'MIYEON',
-                        done: false
+                        like: false,
+                        unlike: true
                     },
                     {
                         image: './images/minnie.jpg',
                         text: 'MINNIE',
-                        done: false
+                        like: false,
+                        unlike: true
                     },
                     {
                         image: './images/soojin.jpg',
                         text: 'SOOJIN',
-                        done: false
+                        like: false,
+                        unlike: true
                     },
                     {
                         image: './images/soyeon.jpg',
                         text: 'SOYEON',
-                        done: false
+                        like: false,
+                        unlike: true
                     },
                     {
                         image: './images/yuqi.jpg',
                         text: 'YUQI',
-                        done: false
+                        like: false,
+                        unlike: true
                     },
                     {
                         image: './images/shuhua.jpg',
                         text: 'SHUHUA',
-                        done: false
+                        like: false,
+                        unlike: true
                     }
                 ],
-                search: {clicked: false, notclick: true}
+                search: {clicked: false, notclick: true},
+                searchText: ''
                 
             }
         },
         methods: {
-            toggleDone(index) {
-                this.members[index].done = !this.members[index].done
+            toggleLike(index) {
+                    this.members[index].like = !this.members[index].like
+                    this.members[index].unlike = !this.members[index].unlike
+            
             },
             showSearch(){
                 this.search.clicked = !this.search.clicked
                 this.search.notclick = !this.search.notclick
             },
             searchMember(){
-
+    
             }
         },
         computed: {
-            countUndone() {
-                return this.members.filter( t => t.done ).length
+            countLiked() {
+                return this.members.filter( t => t.like ).length
             }
         }
     }
