@@ -58,11 +58,11 @@
 
       </div>
     </div>
-    
+
     <div class="absolute w-full flex justify-center h-screen">
       <div class="absolute overflow-hidden">
         <ul class="grid grid-cols-3 grid-rows-2 gap-x-28 gap-y-8 ml-10 mt-10 lg:grid-cols-3">
-          <li v-for="(member, index) in members">
+          <li v-for="(member, index) in searchMember">
             <img v-bind:src="member.image" class="h-72 w-48" :alt="member.text" @click="toggleLike(index)">
             <p class="text-lg font-bold"> {{ member.text }} </p>
             <div class="flex flex-row justify-start space-x-1">

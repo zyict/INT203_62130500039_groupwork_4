@@ -1,7 +1,13 @@
+    class Member{
+        constructor(text){
+            this.text = text;
+        }
+    }
+    
     const app = {
         data() {
             return {
-                members: [{
+                memberList: [{
                         image: './images/miyeon.jpg',
                         text: 'MIYEON',
                         like: false,
@@ -45,21 +51,25 @@
         },
         methods: {
             toggleLike(index) {
-                    this.members[index].like = !this.members[index].like
-                    this.members[index].unlike = !this.members[index].unlike
+                    this.memberList[index].like = !this.memberList[index].like
+                    this.memberList[index].unlike = !this.memberList[index].unlike
             
             },
             showSearch(){
                 this.search.clicked = !this.search.clicked
                 this.search.notclick = !this.search.notclick
-            },
-            searchMember(){
-    
+                this.searchText=''
             }
+            
         },
         computed: {
             countLiked() {
-                return this.members.filter( t => t.like ).length
+                return this.memberList.filter( t => t.like ).length
+            },
+            searchMember(){
+                return this.memberList.filter(member =>{
+                    return member.text.toUpperCase().includes(this.searchText.toUpperCase())
+                })
             }
         }
     }
