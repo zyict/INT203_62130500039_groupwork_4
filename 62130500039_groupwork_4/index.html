@@ -57,37 +57,35 @@
         </div>
 
       </div>
-
-
     </div>
+    
+    <div class="absolute w-full flex justify-center h-screen">
+      <div class="absolute overflow-hidden">
+        <ul class="grid grid-cols-3 grid-rows-2 gap-x-28 gap-y-8 ml-10 mt-10 lg:grid-cols-3">
+          <li v-for="(member, index) in members">
+            <img v-bind:src="member.image" class="h-72 w-48" :alt="member.text" @click="toggleLike(index)">
+            <p class="text-lg font-bold"> {{ member.text }} </p>
+            <div class="flex flex-row justify-start space-x-1">
+              <p>
+                <button @click="toggleLike(index)">
+                  <span class="material-icons" v-if="member.unlike">favorite_border</span>
+                </button>
+                <button @click="toggleLike(index)">
+                  <span class="material-icons" v-show="member.like">favorite</span>
+                </button>
+              </p>
 
-    <div class="absolute overflow-hidden">
-      <ul class="grid grid-cols-2 grid-rows-2 gap-x-28 gap-y-8 md:ml-96 mt-10 lg:grid-cols-3">
-        <li v-for="(member, index) in members">
-          <img v-bind:src="member.image" class="h-96 w-64" :alt="member.text" @click="toggleLike(index)">
-          <p class="text-lg font-bold"> {{ member.text }} </p>
-          <div class="flex flex-row justify-start space-x-1">
-            <p>
-              <button @click="toggleLike(index)">
-                <span class="material-icons" v-if="member.unlike">favorite_border</span>
-              </button>
-              <button @click="toggleLike(index)">
-                <span class="material-icons"v-show="member.like">favorite</span>
-              </button>
-            </p>
-
-          </div>
-        </li>
-      </ul>
-
+            </div>
+          </li>
+        </ul>
+      </div>
     </div>
-
     <video autoplay muted loop class="relative opacity-50" style="z-index: -1;">
       <source src="./vdo/hwaa.mp4" type="video/mp4">
     </video>
 
     <!-- footer -->
-    <div class="h-16 w-full bottom-0 flex space-x-6 justify-center absolute" style="background-color: #7e00bf;">
+    <div class="h-16 w-full bottom-0 flex space-x-6 md:absolute justify-center" style="background-color: #7e00bf;">
       <div class="self-center inline">
         <a target="_blank" href="https://www.facebook.com/G.I.DLE.CUBE/">
           <svg xmlns="http://www.w3.org/2000/svg" fill="white" width="24" height="24" viewBox="0 0 24 24">
@@ -141,7 +139,6 @@
       </div>
 
     </div>
-
   </div>
 
   <!-- my main.js -->
