@@ -30,8 +30,8 @@
         <img class="ml-8 mt-4 w-20 h-12" src="./images/idle_logo.png">
         <div class="w-full pt-6 pr-8 space-x-2 flex justify-end">
           <div>
-            <input v-show="search.clicked" type="text" placeholder="Enter member name..." v-model="searchText"
-              class="px-2 rounded bg-gray-200">
+            <input @keyup="searchMember" v-show="search.clicked" type="text" placeholder="Enter member name..."
+              v-model="searchText" class="px-2 rounded bg-gray-200">
           </div>
           <div class="space-x-1">
             <button @click="showSearch" v-show="search.notclick">
@@ -60,15 +60,19 @@
     </div>
 
     <div class="absolute w-full flex justify-center h-screen">
+      <div class="absolute w-1/2 flex justify-center h-full" v-show="notFound">
+        <p class="font-bold md:text-center w-1/2 text-2xl self-center md:py-48 h-1/2"> Member Not Found.</p>
+      </div>
+
       <div class="absolute overflow-hidden">
         <ul class="grid grid-cols-3 grid-rows-2 gap-x-28 gap-y-8 ml-10 mt-10 lg:grid-cols-3">
-          <li v-for="(member, index) in searchMember">
-            <img v-bind:src="member.image" class="h-72 w-48" :alt="member.text" @click="toggleLike(index)">
+          <li v-show="member.show" v-for="(member, index) in memberList">
+            <img v-bind:src="member.image" class="h-72 w-48" :alt="member.text" @click="showImg(index)">
             <p class="text-lg font-bold"> {{ member.text }} </p>
             <div class="flex flex-row justify-start space-x-1">
               <p>
                 <button @click="toggleLike(index)">
-                  <span class="material-icons" v-if="member.unlike">favorite_border</span>
+                  <span class="material-icons" v-show="member.unlike">favorite_border</span>
                 </button>
                 <button @click="toggleLike(index)">
                   <span class="material-icons" v-show="member.like">favorite</span>
@@ -108,7 +112,8 @@
           <svg xmlns="http://www.w3.org/2000/svg" fill="white" width="24" height="24" viewBox="0 0 24 24">
             <path
               d="M21.231 0h-18.462c-1.529 0-2.769 1.24-2.769 2.769v18.46c0 1.531 1.24 2.771 2.769 2.771h18.463c1.529 0 2.768-1.24 2.768-2.771v-18.46c0-1.529-1.239-2.769-2.769-2.769zm-9.231 7.385c2.549 0 4.616 2.065 4.616 4.615 0 2.549-2.067 4.616-4.616 4.616s-4.615-2.068-4.615-4.616c0-2.55 2.066-4.615 4.615-4.615zm9 12.693c0 .509-.413.922-.924.922h-16.152c-.511 0-.924-.413-.924-.922v-10.078h1.897c-.088.315-.153.64-.2.971-.05.337-.081.679-.081 1.029 0 4.079 3.306 7.385 7.384 7.385s7.384-3.306 7.384-7.385c0-.35-.031-.692-.081-1.028-.047-.331-.112-.656-.2-.971h1.897v10.077zm0-13.98c0 .509-.413.923-.924.923h-2.174c-.511 0-.923-.414-.923-.923v-2.175c0-.51.412-.923.923-.923h2.174c.511 0 .924.413.924.923v2.175z"
-              fill-rule="evenodd" clip-rule="evenodd" /></svg></a>
+              fill-rule="evenodd" clip-rule="evenodd" />
+          </svg></a>
       </div>
 
       <div class="self-center">
