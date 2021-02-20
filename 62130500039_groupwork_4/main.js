@@ -53,7 +53,9 @@ const app = {
             ],
             search: { clicked: false, notclick: true },
             searchText: '',
-            notFound: false
+            notFound: false,
+            img: '',
+            imgShow: false
 
         }
     },
@@ -70,7 +72,11 @@ const app = {
             this.showMember();
         },
         showImg(index) {
-            
+            this.img = this.memberList[index].image
+            this.imgShow = true
+        },
+        closeImg(){
+            this.imgShow = false
         },
         searchMember(){
             if(this.searchText){

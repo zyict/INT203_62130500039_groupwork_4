@@ -74,15 +74,32 @@
                 <button @click="toggleLike(index)">
                   <span class="material-icons" v-show="member.unlike">favorite_border</span>
                 </button>
+
                 <button @click="toggleLike(index)">
                   <span class="material-icons" v-show="member.like">favorite</span>
                 </button>
+
               </p>
 
             </div>
+
           </li>
+
         </ul>
+
       </div>
+
+      <div v-show="imgShow" class="bg-black bg-opacity-50 w-full h-full flex justify-center absolute">
+        <button @click="closeImg">
+          <span class="material-icons absolute top-0 right-0 text-5xl text-white">
+            close
+          </span>
+        </button>
+        <div class="md:py-40">
+          <img v-bind:src="img" class="item-center" width="400" height="600">
+        </div>
+      </div>
+
     </div>
     <video autoplay muted loop class="relative opacity-50" style="z-index: -1;">
       <source src="./vdo/hwaa.mp4" type="video/mp4">
